@@ -1,0 +1,29 @@
+{
+  "brand": {
+    "primary_navy": "#122171",
+    "logo": "assets/logo-white.png",
+    "favicon": "assets/favicon.png"
+  },
+  "urls": {
+    "homepage": "https://grouptravelairlines.pages.dev/",
+    "blog": "https://grouptravelairlines.pages.dev/blog",
+    "article_pattern": "https://grouptravelairlines.pages.dev/blog/{slug}",
+    "quote_target": "https://www.grouptravelairlines.com/"
+  },
+  "assets": [
+    "blog-default.jpg",
+    "blog-group-flights.jpg",
+    "blog-group-reservations.jpg",
+    "blog-group-travel.jpg",
+    "dest-asia.jpg",
+    "dest-europe.jpg",
+    "dest-island.jpg",
+    "dest-more.jpg",
+    "dest-north-america.jpg",
+    "favicon.png",
+    "footer-mountains.jpg",
+    "hero-group-travel.jpg",
+    "logo-white.png",
+    "why-travel.jpg"
+  ]
+}

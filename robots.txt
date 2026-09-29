@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://grouptravelairlines.pages.dev/sitemap.xml
