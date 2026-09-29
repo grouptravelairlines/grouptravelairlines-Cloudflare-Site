@@ -1,0 +1,7 @@
+{
+  "note": "The live project is already seeded. This file is only a reference for the default content shape used by the dashboard.",
+  "homepageStorage": "homepage_content.content",
+  "settingsStorage": "site_settings",
+  "blogPageStorage": "blog_page",
+  "blogPostStorage": "blog_posts"
+}
