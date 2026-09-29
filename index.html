@@ -54,8 +54,9 @@
     .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
     .nav-actions{display:flex;align-items:center;gap:15px}
     .icon-btn{width:42px;height:42px;border:1px solid rgba(255,255,255,.18);background:transparent;color:#fff;border-radius:50%;display:grid;place-items:center}
-    .quote-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;background:var(--gold);color:#171e34;font-weight:800;box-shadow:0 10px 25px rgba(231,190,104,.25);transition:.2s}
-    .quote-btn:hover{transform:translateY(-1px);background:#f0ca78}
+    .quote-btn,.call-btn{display:inline-flex;align-items:center;gap:10px;padding:13px 20px;border-radius:999px;background:var(--gold);color:#171e34;font-weight:800;box-shadow:0 10px 25px rgba(231,190,104,.25);transition:.2s}
+    .quote-btn:hover,.call-btn:hover{transform:translateY(-1px);background:#f0ca78}
+    .call-icon{width:16px;height:16px;display:inline-block;flex:0 0 auto}
 
     .hero{position:relative;min-height:620px;display:flex;align-items:center;overflow:hidden;background:var(--navy-3)}
     .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(7,18,61,.94) 0%,rgba(7,18,61,.68) 34%,rgba(7,18,61,.12) 69%,rgba(7,18,61,.14) 100%);z-index:1}
@@ -100,7 +101,6 @@
     .destination-content{position:absolute;left:0;right:0;bottom:0;z-index:1;padding:20px;color:#fff}
     .destination-content h3{font-family:Inter,ui-sans-serif,sans-serif;font-size:18px;letter-spacing:0;font-weight:900}
     .destination-content p{font-size:12px;color:rgba(255,255,255,.82);margin:6px 0 14px}
-    .circle-arrow{width:38px;height:38px;border-radius:50%;border:1px solid rgba(255,255,255,.55);display:grid;place-items:center;background:rgba(18,33,113,.26);color:#fff}
 
     .split-section{padding:0}
     .split-wrap{display:grid;grid-template-columns:1fr 1fr;min-height:560px;background:var(--ivory)}
@@ -128,7 +128,7 @@
     .blog-empty{display:none;padding:30px;border:1px dashed var(--line);border-radius:20px;text-align:center;color:var(--muted);background:var(--cream)}
 
     .dark-section{background:var(--navy-2);color:#fff;position:relative;overflow:hidden}
-    .dark-section::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,23,79,.96),rgba(10,23,79,.70)),url('/assets/travel-smarter.jpg') center/cover no-repeat;opacity:.95}
+    .dark-section::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,23,79,.96),rgba(10,23,79,.70)),url('/assets/footer-mountains.jpg') center/cover no-repeat;opacity:.95}
     .dark-inner{position:relative;z-index:1;padding:72px 0}
     .dark-kicker{color:var(--gold)}
     .dark-title{color:#fff}
@@ -226,9 +226,11 @@
             <circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 5 5"></path>
           </svg>
         </button>
-        <a class="quote-btn" href="https://www.grouptravelairlines.com/" target="_blank" rel="noopener">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.8 10.2 13.9 7l.3-2.3a2.2 2.2 0 1 0-4.4 0L10 7l-6.5 3.2c-.8.4-1.1 1.4-.7 2.2.3.6.9.9 1.5.9h2l-1.2 6.2c-.2 1 .6 1.8 1.5 1.8.5 0 1-.2 1.3-.7l3.2-4.4 2.7 4.4c.3.5.8.7 1.4.7.9 0 1.6-.8 1.4-1.8L15.3 13h2.2c.6 0 1.2-.3 1.5-.9.4-.8.1-1.8-.7-2.2Z"/></svg>
-          Request a Quote <span aria-hidden="true">→</span>
+        <a class="call-btn" href="tel:+18889287796" aria-label="Call Group Travel Airlines at 1-888-928-7796">
+          <svg class="call-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"></path>
+          </svg>
+          Call Us
         </a>
         <button class="mobile-menu" type="button" aria-label="Open menu">
           <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
@@ -287,26 +289,26 @@
         </div>
 
         <div class="destination-grid">
-          <a class="destination-card" href="https://www.grouptravelairlines.com/" target="_blank" rel="noopener">
+          <article class="destination-card">
             <img src="/assets/dest-europe.jpg" alt="Europe group travel destination">
-            <div class="destination-content"><h3>Europe</h3><p>Timeless cities and rich cultures</p><span class="circle-arrow">→</span></div>
-          </a>
-          <a class="destination-card" href="https://www.grouptravelairlines.com/" target="_blank" rel="noopener">
+            <div class="destination-content"><h3>Europe</h3><p>Timeless cities and rich cultures</p></div>
+          </article>
+          <article class="destination-card">
             <img src="/assets/dest-asia.jpg" alt="Asia group travel destination">
-            <div class="destination-content"><h3>Asia</h3><p>Incredible experiences</p><span class="circle-arrow">→</span></div>
-          </a>
-          <a class="destination-card" href="https://www.grouptravelairlines.com/" target="_blank" rel="noopener">
+            <div class="destination-content"><h3>Asia</h3><p>Incredible experiences</p></div>
+          </article>
+          <article class="destination-card">
             <img src="/assets/dest-north-america.jpg" alt="North America group travel destination">
-            <div class="destination-content"><h3>North America</h3><p>Iconic landscapes and adventures</p><span class="circle-arrow">→</span></div>
-          </a>
-          <a class="destination-card" href="https://www.grouptravelairlines.com/" target="_blank" rel="noopener">
+            <div class="destination-content"><h3>North America</h3><p>Iconic landscapes and adventures</p></div>
+          </article>
+          <article class="destination-card">
             <img src="/assets/dest-island.jpg" alt="Island group travel destination">
-            <div class="destination-content"><h3>Island Getaways</h3><p>Relaxing escapes for groups</p><span class="circle-arrow">→</span></div>
-          </a>
-          <a class="destination-card" href="https://www.grouptravelairlines.com/" target="_blank" rel="noopener">
+            <div class="destination-content"><h3>Island Getaways</h3><p>Relaxing escapes for groups</p></div>
+          </article>
+          <article class="destination-card">
             <img src="/assets/dest-more.jpg" alt="Additional group travel destinations">
-            <div class="destination-content"><h3>More Destinations</h3><p>Explore all inspiring places</p><span class="circle-arrow">→</span></div>
-          </a>
+            <div class="destination-content"><h3>More Destinations</h3><p>Explore all inspiring places</p></div>
+          </article>
         </div>
       </div>
     </section>
