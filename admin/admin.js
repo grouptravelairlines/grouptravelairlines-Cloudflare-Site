@@ -43,39 +43,6 @@ function initRichEditor(){
     }
   });
 
-  document.querySelectorAll(".gta-align-button").forEach(button=>{
-    button.addEventListener("click",()=>{
-      const alignment=button.dataset.align||"left";
-
-      quill.format(
-        "align",
-        alignment==="left"?false:alignment,
-        "user"
-      );
-
-      document.querySelectorAll(".gta-align-button")
-        .forEach(btn=>btn.classList.remove("is-active"));
-
-      button.classList.add("is-active");
-      quill.focus();
-    });
-  });
-
-  quill.on("selection-change",range=>{
-    if(!range)return;
-
-    const format=quill.getFormat(range);
-    const active=format.align||"left";
-
-    document.querySelectorAll(".gta-align-button")
-      .forEach(button=>{
-        button.classList.toggle(
-          "is-active",
-          (button.dataset.align||"left")===active
-        );
-      });
-  });
-
   quill.on("text-change",()=>{
     dirty=true;
     updateEditorStats();
