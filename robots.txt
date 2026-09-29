@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
-
+Disallow: /admin
 Sitemap: https://grouptravelairlines.pages.dev/sitemap.xml

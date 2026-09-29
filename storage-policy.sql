@@ -1,0 +1,5 @@
+-- Storage policies already created in the project.
+-- These are the exact policies used for bucket gta-media.
+create policy "Admins can upload GTA media" on storage.objects for insert to authenticated with check (bucket_id='gta-media' and exists(select 1 from public.admin_profiles where admin_profiles.user_id=(select auth.uid()) and admin_profiles.role='admin'));
+create policy "Admins can update GTA media" on storage.objects for update to authenticated using (bucket_id='gta-media' and exists(select 1 from public.admin_profiles where admin_profiles.user_id=(select auth.uid()) and admin_profiles.role='admin')) with check (bucket_id='gta-media' and exists(select 1 from public.admin_profiles where admin_profiles.user_id=(select auth.uid()) and admin_profiles.role='admin'));
+create policy "Admins can delete GTA media" on storage.objects for delete to authenticated using (bucket_id='gta-media' and exists(select 1 from public.admin_profiles where admin_profiles.user_id=(select auth.uid()) and admin_profiles.role='admin'));
