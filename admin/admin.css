@@ -35,3 +35,11 @@
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="large"]::before,.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="large"]::before{content:"Large"}
 .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="huge"]::before,.ql-snow .ql-picker.ql-size .ql-picker-label[data-value="huge"]::before{content:"Huge"}
 @media(max-width:700px){.gta-rich-toolbar .toolbar-group{border-right:0;padding-right:0}.editor-meta-row{flex-direction:column;align-items:flex-start}}
+/* Hide the oversized alignment icon in the toolbar only */
+.ql-toolbar.ql-snow .ql-picker.ql-align .ql-picker-label::before {
+  display: none !important;
+}
+
+.ql-toolbar.ql-snow .ql-picker.ql-align .ql-picker-label svg {
+  display: none !important;
+}
