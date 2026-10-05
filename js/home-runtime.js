@@ -95,13 +95,22 @@ async function loadBlogPreview(){
 
 (async()=>{
   try{
-    const [{data:s},{data:h}]=await Promise.all([
+    const [{data:s,error:se},{data:h,error:he}]=await Promise.all([
       supabase.from("site_settings").select("*").eq("id",1).maybeSingle(),
       supabase.from("homepage_content").select("content").eq("id",1).maybeSingle()
     ]);
+
+    if(se) throw se;
+    if(he) throw he;
+
     apply(s||defaults.settings,h?.content||defaults.homepage);
+
     await loadBlogPreview();
+
+    document.body.classList.add("cms-ready");
   }catch(err){
     console.warn("CMS load failed; static homepage retained.",err);
+
+    document.body.classList.add("cms-ready");
   }
 })();
