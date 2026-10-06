@@ -524,17 +524,16 @@ async function checkHome(page) {
       );
 
     addCheck(
-      'Homepage HTTP 200',
-      response?.ok &&
-        response.status === 200,
-      {
-        status:
-          response?.status ??
-          0,
-
-        url
-      }
-    );
+  'Homepage HTTP 200',
+  response?.ok() &&
+    response.status() === 200,
+  {
+    status:
+  response?.status() ??
+0,
+    url
+  }
+);
 
     addCheck(
       'Homepage canonical exact',
