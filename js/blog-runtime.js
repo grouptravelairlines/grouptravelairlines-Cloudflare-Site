@@ -2,11 +2,19 @@ import { supabase } from "/js/supabase-client.js";
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[c]));
 (async()=>{
   try{
-    const [{data:page},{data:settings},{data:posts}]=await Promise.all([
-      supabase.from("blog_page").select("*").eq("id",1).maybeSingle(),
-      supabase.from("site_settings").select("phone,email,quote_url").eq("id",1).maybeSingle(),
-      supabase.from("blog_posts").select("id,title,slug,excerpt,featured_image_url,image_alt,published_at,display_date").eq("published",true).order("published_at",{ascending:false})
-    ]);
+    const [{ data: page, error: pageError }, { data: settings, error: settingsError }] =
+  await Promise.all([
+    supabase.from("blog_page").select("*").eq("id", 1).maybeSingle(),
+    supabase.from("site_settings").select("phone,email,quote_url").eq("id", 1).maybeSingle()
+  ]);
+
+const { data: posts, error: postsError } = await supabase
+  .from("blog_posts")
+  .select("id,title,slug,excerpt,featured_image_url,image_alt,published_at,display_date")
+  .eq("published", true)
+  .order("published_at", { ascending: false });
+
+if (postsError) throw postsError;
     const p=page||{}; document.title=p.seo_title||"Blog | Group Travel Airlines";
     const meta=document.querySelector('meta[name="description"]'); if(meta)meta.content=p.meta_description||meta.content;
     document.getElementById("blogEyebrow").textContent=p.eyebrow||"GROUP TRAVEL AIRLINES";
