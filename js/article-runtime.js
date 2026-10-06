@@ -13,10 +13,29 @@ function safeHtml(html=""){
   return t.innerHTML;
 }
 (async()=>{
-  const slug=slugFromPath();
-  try{
-    const {data:p,error}=await supabase.from("blog_posts").select("*").eq("slug",slug).eq("published",true).maybeSingle();
-    if(error||!p){document.getElementById("articleRoot").innerHTML='<div class="error">This article could not be found.</div>';return;}
+  const slug=slugFromPath().trim().replace(/^\/+|\/+$/g,"");
+try{
+  if(!slug){
+    document.getElementById("articleRoot").innerHTML='<div class="error">This article could not be found.</div>';
+    return;
+  }
+
+  const {data:posts,error}=await supabase
+    .from("blog_posts")
+    .select("*")
+    .eq("published",true)
+    .order("published_at",{ascending:false});
+
+  if(error) throw error;
+
+  const p=(posts||[]).find(post=>
+    String(post.slug||"").trim().replace(/^\/+|\/+$/g,"")===slug
+  );
+
+  if(!p){
+    document.getElementById("articleRoot").innerHTML='<div class="error">This article could not be found.</div>';
+    return;
+  }
     const canonical=`https://grouptravelairlines.pages.dev/blog/${encodeURIComponent(slug)}`;
     document.title=p.seo_title||p.title||"Group Travel Airlines";
     document.getElementById("canonical").href=canonical;
