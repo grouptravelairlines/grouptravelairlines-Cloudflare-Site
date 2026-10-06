@@ -598,12 +598,12 @@ async function checkBlog(page) {
 
     addCheck(
       'Blog rendered HTTP 200',
-      response?.ok &&
-        response.status === 200,
-      {
-        status:
-          response?.status ??
-          0,
+      response?.ok() &&
+  response.status() === 200,
+{
+  status:
+    response?.status() ??
+    0,
 
         url
       }
@@ -694,12 +694,12 @@ async function checkArticle(
 
     addCheck(
       `Article ${slug} HTTP 200`,
-      response?.ok &&
-        response.status === 200,
-      {
-        status:
-          response?.status ??
-          0,
+      response?.ok() &&
+response.status() === 200,
+{
+  status:
+    response?.status() ??
+    0,
 
         url
       }
@@ -707,11 +707,11 @@ async function checkArticle(
 
     addCheck(
       `Article ${slug} browser load`,
-      response?.status === 200,
-      {
-        status:
-          response?.status ??
-          0,
+      response?.status() === 200,
+{
+  status:
+    response?.status() ??
+    0,
 
         url
       }
