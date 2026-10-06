@@ -591,7 +591,6 @@ async function checkBlog(page) {
       response,
       canonical,
       ogUrl,
-      twitterUrl,
       title
     } =
       await getRenderedSeo(
