@@ -47,7 +47,7 @@ jobs:
       - name: Run GTA Healing Agent
         id: healer
         continue-on-error: true
-        run: node scripts/healing-agent/healing-agent.mjs
+        run: node scripts/healing-agent.mjs
 
       - name: Upload healing report
         if: always()
