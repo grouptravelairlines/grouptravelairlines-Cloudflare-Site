@@ -1,1 +1,13 @@
+{
+  "name": "gta-healing-agent",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node ../healing-agent.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.63.0"
+  }
+}
 
