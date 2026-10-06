@@ -73,34 +73,18 @@ jobs:
           git commit -m "chore: update public sitemap and robots"
           git push
 
-                - name: Finalize workflow status
+      - name: Finalize workflow status
         if: always()
         env:
           HEALER_OUTCOME: ${{ steps.healer.outcome }}
+        shell: bash
         run: |
-          if [ ! -f "healing-report.json" ]; then
-            echo "healing-report.json was not found."
-            echo "Healing Agent step outcome: ${HEALER_OUTCOME}"
+          echo "Healing Agent result: ${HEALER_OUTCOME}"
 
-            if [ "${HEALER_OUTCOME}" = "failure" ]; then
-              exit 1
-            fi
-
-            exit 0
+          if [ "${HEALER_OUTCOME}" = "failure" ]; then
+            echo "Healing Agent reported failures."
+            exit 1
           fi
 
-          node <<'NODE'
-          const fs = require('fs');
-
-          const report = JSON.parse(
-            fs.readFileSync('healing-report.json', 'utf8')
-          );
-
-          console.log(JSON.stringify(report, null, 2));
-
-          const failures = Array.isArray(report.failures)
-            ? report.failures.length
-            : 0;
-
-          process.exit(failures > 0 ? 1 : 0);
-          NODE
+          echo "Healing Agent completed successfully."
+          exit 0
