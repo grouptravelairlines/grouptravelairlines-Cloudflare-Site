@@ -227,7 +227,6 @@ async function getRenderedSeo(
     return {
       canonical,
       ogUrl,
-      twitterUrl,
       blogPosting,
 
       title:
@@ -684,7 +683,6 @@ async function checkArticle(
       response,
       canonical,
       ogUrl,
-      twitterUrl,
       blogPosting,
       title,
       h1
