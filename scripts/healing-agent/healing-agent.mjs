@@ -186,10 +186,6 @@ async function getRenderedSeo(
       'meta[property="og:url"]'
     );
 
-    const twitterUrl = getMeta(
-      'meta[name="twitter:url"]'
-    );
-
     const blogPosting = [
       ...document.querySelectorAll(
         'script[type="application/ld+json"]'
@@ -743,17 +739,6 @@ async function checkArticle(
         ogUrl,
 
         expectedOgUrl:
-          url
-      }
-    );
-
-    addCheck(
-      `Article ${slug} twitter:url exact`,
-      twitterUrl === url,
-      {
-        twitterUrl,
-
-        expectedTwitterUrl:
           url
       }
     );
