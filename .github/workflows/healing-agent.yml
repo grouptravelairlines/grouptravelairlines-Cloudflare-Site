@@ -47,7 +47,8 @@ jobs:
       - name: Run GTA Healing Agent
         id: healer
         continue-on-error: true
-        run: node scripts/healing-agent.mjs
+        working-directory: scripts/healing-agent
+        run: node healing-agent.mjs
 
       - name: Upload healing report
         if: always()
@@ -81,10 +82,15 @@ jobs:
         run: |
           echo "Healing Agent result: ${HEALER_OUTCOME}"
 
-          if [ "${HEALER_OUTCOME}" = "failure" ]; then
-            echo "Healing Agent reported failures."
+          if [ ! -f "healing-report.json" ]; then
+            echo "healing-report.json was not created."
+            echo "The Healing Agent did not complete normally."
             exit 1
           fi
 
-          echo "Healing Agent completed successfully."
-          exit 0
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('healing-report.json', 'utf8'));
+          console.log(JSON.stringify(report, null, 2));
+          process.exit(Array.isArray(report.failures) && report.failures.length > 0 ? 1 : 0);
+          NODE
