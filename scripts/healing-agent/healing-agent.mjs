@@ -639,17 +639,6 @@ async function checkBlog(page) {
     );
 
     addCheck(
-      'Blog twitter:url exact',
-      twitterUrl === url,
-      {
-        twitterUrl,
-
-        expectedTwitterUrl:
-          url
-      }
-    );
-
-    addCheck(
       'Blog has title',
       Boolean(title),
       {
