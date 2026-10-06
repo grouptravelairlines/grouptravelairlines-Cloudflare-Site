@@ -3,7 +3,7 @@ name: GTA Healing Agent
 on:
   workflow_dispatch:
   schedule:
-    - cron: "3-59/5 * * * *"
+    - cron: '*/5 * * * *'
 
 permissions:
   contents: write
@@ -13,9 +13,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  heal:
-    name: Check and Heal Group Travel Airlines
+  check-and-heal:
     runs-on: ubuntu-latest
+    timeout-minutes: 8
 
     env:
       SITE_URL: https://grouptravelairlines.pages.dev
@@ -24,46 +24,61 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
         with:
           node-version: 24
           cache: npm
           cache-dependency-path: scripts/healing-agent/package.json
+          package-manager-cache: false
 
       - name: Install Healing Agent dependencies
         working-directory: scripts/healing-agent
-        run: npm install
+        run: npm install --no-audit --no-fund
 
       - name: Install Playwright Chromium
         working-directory: scripts/healing-agent
         run: npx playwright install --with-deps chromium
 
       - name: Run GTA Healing Agent
-        run: node scripts/healing-agent.mjs
+        id: healer
+        continue-on-error: true
+        run: node scripts/healing-agent/healing-agent.mjs
 
       - name: Upload healing report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: gta-healing-report
           path: healing-report.json
-          if-no-files-found: ignore
+          if-no-files-found: warn
+          retention-days: 14
 
       - name: Commit safe healing changes
+        if: always()
+        shell: bash
         run: |
-          if git diff --quiet; then
-            echo "No healing changes detected."
+          if git diff --quiet -- sitemap.xml robots.txt; then
+            echo "No safe healing changes to commit."
             exit 0
           fi
 
-          git config user.name "GTA Healing Agent"
+          git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add robots.txt sitemap.xml
-          git commit -m "Auto-heal SEO files"
+          git add sitemap.xml robots.txt
+          git commit -m "chore: update public sitemap and robots"
           git push
+
+      - name: Finalize workflow status
+        if: always()
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('healing-report.json', 'utf8'));
+          console.log(JSON.stringify(report, null, 2));
+          process.exit(report.failures.length > 0 ? 1 : 0);
+          NODE
