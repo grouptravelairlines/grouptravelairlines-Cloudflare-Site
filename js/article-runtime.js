@@ -14,6 +14,7 @@ function safeHtml(html=""){
 }
 (async()=>{
   const slug=slugFromPath().trim().replace(/^\/+|\/+$/g,"");
+  if (document.getElementById("articleRoot")?.dataset.ssr === "true") return;
 try{
   if(!slug){
     document.getElementById("articleRoot").innerHTML='<div class="error">This article could not be found.</div>';
